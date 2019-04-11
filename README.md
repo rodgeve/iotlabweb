@@ -4,6 +4,8 @@ Welcome to the Solace IOT Lab Project.
 ## Instructions
 Clone this project and host it from a web server.  Launch the website and follow these steps to get started:
 
+TODO
+
 * Specify your Solace Cloud details
   * Connection URL
   * Credentials
