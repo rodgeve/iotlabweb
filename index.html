@@ -5,19 +5,21 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Solace IOT Lab| IOTLab</title>
+    <!--<script src="lib/solclient.js"></script>-->
+    <!--<script src="index.js"></script>-->
     <script src="Build/UnityLoader.js"></script>
     <script>
     var gameInstance = UnityLoader.instantiate("gameContainer", "Build/IOTLabWeb.json");
     </script>
   </head>
-  
+
   <body>
     <div id="gameContainer" style="width: 960px; height: 600px; margin: auto"></div>
     <button onClick="gameInstance.SendMessage('CarKit', 'setLeftMotorSpeed', -100.00);gameInstance.SendMessage('CarKit', 'setRightMotorSpeed', 100.0);gameInstance.SendMessage('CarKit', 'setDriveDuration', 0.5);">Turn Left</button>
     <button onClick="gameInstance.SendMessage('CarKit', 'setLeftMotorSpeed', 100.0);gameInstance.SendMessage('CarKit', 'setRightMotorSpeed', 100.0);gameInstance.SendMessage('CarKit', 'setDriveDuration', 0.5);">Drive Forward</button>
     <button onClick="gameInstance.SendMessage('CarKit', 'setLeftMotorSpeed', 100.0);gameInstance.SendMessage('CarKit', 'setRightMotorSpeed', -100.0);gameInstance.SendMessage('CarKit', 'setDriveDuration', 0.5);">Turn Right</button>
   </body>
-  
+
 </html>
 
 
