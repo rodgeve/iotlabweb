@@ -13,10 +13,11 @@
   
   <body>
     <div id="gameContainer" style="width: 960px; height: 600px; margin: auto"></div>
-    <button onClick="gameInstance.SendMessage('CarKit', 'setDriveDuration', 0.5);gameInstance.SendMessage('CarKit', 'setSteeringAngle', -15.0);">Turn Left</button>
-    <button onClick="gameInstance.SendMessage('CarKit', 'setDriveDuration', 0.5);">Drive Forward</button>
-    <button onClick="gameInstance.SendMessage('CarKit', 'setDriveDuration', 0.5);gameInstance.SendMessage('CarKit', 'setSteeringAngle', 15.0);">Turn Right</button>
+    <button onClick="gameInstance.SendMessage('CarKit', 'setLeftMotorSpeed', -100.00);gameInstance.SendMessage('CarKit', 'setRightMotorSpeed', 100.0);gameInstance.SendMessage('CarKit', 'setDriveDuration', 0.5);">Turn Left</button>
+    <button onClick="gameInstance.SendMessage('CarKit', 'setLeftMotorSpeed', 100.0);gameInstance.SendMessage('CarKit', 'setRightMotorSpeed', 100.0);gameInstance.SendMessage('CarKit', 'setDriveDuration', 0.5);">Drive Forward</button>
+    <button onClick="gameInstance.SendMessage('CarKit', 'setLeftMotorSpeed', 100.0);gameInstance.SendMessage('CarKit', 'setRightMotorSpeed', -100.0);gameInstance.SendMessage('CarKit', 'setDriveDuration', 0.5);">Turn Right</button>
   </body>
   
 </html>
+
 
