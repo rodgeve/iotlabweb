@@ -3,23 +3,164 @@
 
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Solace IOT Lab| IOTLab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>IOTLab</title>
     <!--<script src="lib/solclient.js"></script>-->
     <!--<script src="index.js"></script>-->
-    <script src="Build/UnityLoader.js"></script>
-    <script>
-    var gameInstance = UnityLoader.instantiate("gameContainer", "Build/IOTLabWeb.json");
-    </script>
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+      body {
+        margin: 0;
+        background: #444;
+      }
+      #gameContainer {
+        width: 100vw;
+        height: 90vh;
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      /* try to handle mobile dialog */
+      canvas + * {
+        z-index: 2;
+      }
+      .logo {
+          display: block;
+          max-width: 100vw;
+          max-height: 70vh;
+      }
+
+      .progress {
+          margin: 1.5em;
+          border: 1px solid white;
+          width: 50vw;
+          display: none;
+      }
+      .progress .full {
+          margin: 2px;
+          background: white;
+          height: 1em;
+          transform-origin: top left;
+      }
+
+      #loader {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .spinner,
+      .spinner:after {
+        border-radius: 50%;
+        width: 5em;
+        height: 5em;
+      }
+      .spinner {
+        margin: 10px;
+        font-size: 10px;
+        position: relative;
+        text-indent: -9999em;
+        border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+        border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+        border-left: 1.1em solid #ffffff;
+        transform: translateZ(0);
+        animation: spinner-spin 1.1s infinite linear;
+      }
+      @keyframes spinner-spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+    </style>
   </head>
 
   <body>
-    <div id="gameContainer" style="width: 960px; height: 600px; margin: auto"></div>
-    <button onClick="gameInstance.SendMessage('CarKit', 'setLeftMotorSpeed', -100.00);gameInstance.SendMessage('CarKit', 'setRightMotorSpeed', 100.0);gameInstance.SendMessage('CarKit', 'setDriveDuration', 0.5);">Turn Left</button>
-    <button onClick="gameInstance.SendMessage('CarKit', 'setLeftMotorSpeed', 100.0);gameInstance.SendMessage('CarKit', 'setRightMotorSpeed', 100.0);gameInstance.SendMessage('CarKit', 'setDriveDuration', 0.5);">Drive Forward</button>
-    <button onClick="gameInstance.SendMessage('CarKit', 'setLeftMotorSpeed', 100.0);gameInstance.SendMessage('CarKit', 'setRightMotorSpeed', -100.0);gameInstance.SendMessage('CarKit', 'setDriveDuration', 0.5);">Turn Right</button>
+      <div id="gameContainer"></div>
+      <div id="loader">
+          <img class="logo" src="logo.png">
+          <div class="spinner"></div>
+          <div class="progress"><div class="full"></div></div>
+      </div>
+
+      <select style="width: 280px" id="VehicleId" name="VehicleId">
+        <option selected="">Kevin</option>
+        <option>Rodrigo</option>
+        <option>Greg</option>
+      </select>
+      
+      <button onClick="gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setMaxWheelTorque', 7000.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setLeftMotorSpeed', -100.00);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setRightMotorSpeed', 100.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setDriveDuration', 0.5);">Turn Left</button>
+      <button onClick="gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setMaxWheelTorque', 7000.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setLeftMotorSpeed', 100.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setRightMotorSpeed', 100.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setDriveDuration', 0.5);">Drive Forward</button>
+      <button onClick="gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setMaxWheelTorque', 7000.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setLeftMotorSpeed', 100.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setRightMotorSpeed', -100.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setDriveDuration', 0.5);">Turn Right</button>
+      <button onClick="gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setMaxWheelTorque', 20000.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setLeftMotorSpeed', 100.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setRightMotorSpeed', 100.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setDriveDuration', 2.0);">Turbo Boost</button>
+      <button onClick="gameInstance.SendMessage('EventSystem', 'RegisterVehicle', 'vin-'+ getNewVehicleId() + ',0,8.0,12.0');">Add Vehicle</button>
+      <button onClick="gameInstance.SendMessage('EventSystem', 'ResetVehicles');">Reset Vehicles</button>
+      <button onClick="gameInstance.SendMessage('EventSystem', 'ResetObstacles');">Reset Obstacles</button>
+    
   </body>
 
+  <script src="Build/UnityLoader.js"></script>
+  <script>
+  var gameInstance = UnityLoader.instantiate("gameContainer", "Build/IOTLabWeb.json", {onProgress: UnityProgress});
+  var nextVehicleId = 0;
+  function getNewVehicleId() {
+    nextVehicleId++;
+    return nextVehicleId.toString();
+  }
+  function UnityProgress(gameInstance, progress) {
+    if (!gameInstance.Module) {
+      return;
+    }
+    const loader = document.querySelector("#loader");
+    if (!gameInstance.progress) {
+      const progress = document.querySelector("#loader .progress");
+      progress.style.display = "block";
+      gameInstance.progress = progress.querySelector(".full");
+      loader.querySelector(".spinner").style.display = "none";
+    }
+    gameInstance.progress.style.transform = `scaleX(${progress})`;
+    if (progress === 1 && !gameInstance.removeTimeout) {
+          gameInstance.removeTimeout = setTimeout(function() {
+          loader.style.display = "none";
+
+          gameInstance.SendMessage('EventSystem', 'CreateGameObstacle', '0,0.0,0.0');
+          gameInstance.SendMessage('EventSystem', 'CreateGameObstacle', '1,5.0,0.0');
+          gameInstance.SendMessage('EventSystem', 'CreateGameObstacle', '2,10.0,0.0');
+          gameInstance.SendMessage('EventSystem', 'CreateGameObstacle', '3,15.0,0.0');
+          gameInstance.SendMessage('EventSystem', 'CreateGameObstacle', '4,20.0,0.0');
+          gameInstance.SendMessage('EventSystem', 'CreateGameObstacle', '5,25.0,0.0');
+          gameInstance.SendMessage('EventSystem', 'CreateGameObstacle', '6,30.0,0.0');
+          gameInstance.SendMessage('EventSystem', 'CreateGameObstacle', '7,35.0,0.0');
+
+          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', 'Kevin,0,5.0,-10.0');
+          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', 'Rodrigo,0,10.0,-10.0');
+          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', 'Greg,0,15.0,-10.0');
+          
+      }, 2000);
+    }
+  }
+  </script>
+
 </html>
+
+
+
 
 

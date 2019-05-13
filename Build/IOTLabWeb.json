@@ -1,13 +1,17 @@
 {
 "companyName": "GeveInc",
 "productName": "IOTLab",
+"productVersion": "1.0",
 "dataUrl": "IOTLabWeb.data.unityweb",
 "asmCodeUrl": "IOTLabWeb.asm.code.unityweb",
 "asmMemoryUrl": "IOTLabWeb.asm.memory.unityweb",
 "asmFrameworkUrl": "IOTLabWeb.asm.framework.unityweb",
 "TOTAL_MEMORY": 536870912,
-"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
 "splashScreenStyle": "Dark",
-"backgroundColor": "#231F20"
+"backgroundColor": "#231F20",
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.1.0f2"
 }
