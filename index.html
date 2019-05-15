@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>IOTLab</title>
-    <!--<script src="lib/solclient.js"></script>-->
-    <!--<script src="index.js"></script>-->
+    <script src="lib/solclient.js"></script>
+    <script src="index.js"></script>
     <style>
       html {
         box-sizing: border-box;
@@ -102,10 +102,16 @@
 
       <select style="width: 280px" id="VehicleId" name="VehicleId">
         <option selected="">Kevin</option>
-        <option>Rodrigo</option>
-        <option>Greg</option>
+        <option>6993791</option>
+        <option>14073209</option>
+        <option>6960881</option>
+        <option>5903783</option>
+        <option>2824070</option>
+        <option>6248841</option>
+        <option>699662</option>
+        <option>2824802</option>
       </select>
-      
+  
       <button onClick="gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setMaxWheelTorque', 7000.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setLeftMotorSpeed', -100.00);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setRightMotorSpeed', 100.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setDriveDuration', 0.5);">Turn Left</button>
       <button onClick="gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setMaxWheelTorque', 7000.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setLeftMotorSpeed', 100.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setRightMotorSpeed', 100.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setDriveDuration', 0.5);">Drive Forward</button>
       <button onClick="gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setMaxWheelTorque', 7000.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setLeftMotorSpeed', 100.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setRightMotorSpeed', -100.0);gameInstance.SendMessage(document.getElementById('VehicleId').value, 'setDriveDuration', 0.5);">Turn Right</button>
@@ -149,9 +155,15 @@
           gameInstance.SendMessage('EventSystem', 'CreateGameObstacle', '6,30.0,0.0');
           gameInstance.SendMessage('EventSystem', 'CreateGameObstacle', '7,35.0,0.0');
 
-          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', 'Kevin,0,5.0,-10.0');
-          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', 'Rodrigo,0,10.0,-10.0');
-          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', 'Greg,0,15.0,-10.0');
+          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', '6993791,0,5.0,-10.0');
+          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', '14073209,0,10.0,-10.0');
+          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', '6960881,0,15.0,-10.0');
+          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', '5903783,0,20.0,-10.0');
+          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', '2824070,0,25.0,-10.0');
+          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', '6248841,0,30.0,-10.0');
+          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', '699662,0,35.0,-10.0');
+          gameInstance.SendMessage('EventSystem', 'RegisterVehicle', '2824802,0,40.0,-10.0');
+          
           
       }, 2000);
     }
